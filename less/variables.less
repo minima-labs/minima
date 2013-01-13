@@ -1,0 +1,25 @@
+@base-font-size:          14;
+@base-font-ratio:         1.2;
+@base-font-family:        "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+@base-line-ratio:         1.618;
+@base-line-width:         400;
+@base-line-height:        @base-font-size * (@base-line-ratio - ((1 / (2 * @base-line-ratio)) * (1 - (@base-line-width / (@base-font-size * @base-line-ratio * @base-font-size * @base-line-ratio)))));
+
+@base-gutter-width:       40;
+
+@headings-font-family:    "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+
+// Variables in media queries are currently broken in lessphp v.0.3.8. As soon
+// as the following issue is resolved theses variables will be usable:
+//  - https://github.com/leafo/lessphp/issues/335
+@lap-start:               481px;
+@desk-start:              1024px;
+@palm-end:                @lap-start - 1px;
+@lap-end:                 @desk-start - 1px;
+
+@palm:                    ~"only screen and (max-width: @{palm-end})";
+@lap:                     ~"only screen and (min-width: @{lap-start}) and (max-width: @{lap-end})";
+@portable:                ~"only screen and (max-width: @{lap-end})";
+@desk:                    ~"only screen and (min-width: @{desk-start})";

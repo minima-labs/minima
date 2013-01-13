@@ -1,0 +1,27 @@
+#primary, #secondary, #tertiary {
+  margin-bottom: 0;
+}
+
+// Palm
+//@media @palm {
+@media only screen and (max-width: 480px) {
+  @import "layout/palm.less";
+}
+
+// Lap
+//@media @lap {
+@media only screen and (min-width: 481px) and (max-width: 1023px) {
+  @import "layout/lap.less";
+}
+
+// Portable
+//@media @portable {
+@media only screen and (max-width: 1023px) {
+  @import "layout/portable.less";
+}
+
+// Desk
+//@media @desk {
+@media only screen and (min-width: 1024px) {
+  @import "layout/desk.less";
+}

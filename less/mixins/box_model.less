@@ -1,0 +1,35 @@
+// Margin
+.margin(@side, @ratio: 1) when (@side = top) {
+	margin-top: round(@ratio * @base-line-height) + 0px;
+	margin-top: (@ratio * (@base-line-height / @base-font-size)) + 0rem;
+}
+.margin(@side, @ratio: 1) when (@side = bottom) {
+	margin-bottom: round(@ratio * @base-line-height) + 0px;
+	margin-bottom: (@ratio * (@base-line-height / @base-font-size)) + 0rem;
+}
+.margin(@side, @ratio: 1) when (@side = right) {
+	margin-right: (@ratio * @base-gutter-width) + 0px;
+	margin-right: (@ratio * (@base-gutter-width / @base-font-size)) + 0rem;
+}
+.margin(@side, @ratio: 1) when (@side = left) {
+	margin-left: (@ratio * @base-gutter-width) + 0px;
+	margin-left: (@ratio * (@base-gutter-width / @base-font-size)) + 0rem;
+}
+
+// Padding
+.padding(@side, @ratio: 1) when (@side = top) {
+	padding-top: round(@ratio * @base-line-height) + 0px;
+	padding-top: (@ratio * (@base-line-height / @base-font-size)) + 0rem;
+}
+.padding(@side, @ratio: 1) when (@side = bottom) {
+	padding-bottom: round(@ratio * @base-line-height) + 0px;
+	padding-bottom: (@ratio * (@base-line-height / @base-font-size)) + 0rem;
+}
+.padding(@side, @ratio: 1) when (@side = right) {
+	padding-right: (@ratio * @base-gutter-width) + 0px;
+	padding-right: (@ratio * (@base-gutter-width / @base-font-size)) + 0rem;
+}
+.padding(@side, @ratio: 1) when (@side = left) {
+	padding-left: (@ratio * @base-gutter-width) + 0px;
+	padding-left: (@ratio * (@base-gutter-width / @base-font-size)) + 0rem;
+}

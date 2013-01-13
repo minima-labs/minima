@@ -1,1 +1,37 @@
+core = 7.x
+description =
 name = Minima
+
+
+; STYLESHEETS ==================================================================
+
+stylesheets[all][] = less/minima.less
+
+; Omit core stylesheets.
+stylesheets[all][] = admin.css
+stylesheets[all][] = system.menus.css
+
+
+; SCRIPTS ======================================================================
+
+;scripts[] = js/
+
+
+; Regions ======================================================================
+
+regions[header] = Header
+regions[navigation] = Navigation
+regions[top] = Top
+regions[content_top] = Content top
+regions[content] = Content
+regions[content_aside] = Content aside
+regions[content_bottom] = Content bottom
+regions[secondary] = Secondary
+regions[tertiary] = Tertiary
+regions[bottom] = Bottom
+regions[footer] = Footer
+
+regions[help] = Help
+regions[highlighted] = Highlighted
+regions[page_top] = Page top
+regions[page_bottom] = Page bottom

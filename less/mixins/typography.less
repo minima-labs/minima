@@ -1,0 +1,22 @@
+// Font size
+.font-size(@font-size, @context: @base-font-size) {
+  font-size: @font-size + 0px;
+  font-size: (@font-size / @context) + 0rem;
+  .line-height(@font-size);
+}
+
+// Line height
+.line-height(@font-size) {
+  line-height: @base-line-ratio - ((1 / (2 * @base-line-ratio)) * (1 - (@base-line-width / (@font-size * @base-line-ratio * @font-size * @base-line-ratio))));
+}
+
+// Font scale
+.font-ratio(@multiple, @font-size: @base-font-size, @ratio: @base-font-ratio) when (@multiple > 0) {
+  .font-ratio(@multiple - 1, @font-size * @ratio, @ratio);
+}
+.font-ratio(@multiple, @font-size: @base-font-size, @ratio: @base-font-ratio) when (@multiple < 0) {
+  .font-ratio(@multiple + 1, @font-size / @ratio, @ratio);
+}
+.font-ratio(@multiple, @font-size: @base-font-size, @ratio: @base-font-ratio) when (@multiple = 0) {
+  .font-size(round(@font-size));
+}
