@@ -14,9 +14,25 @@
   </div>
 </header>
 
-<?php print render($page['navigation']); ?>
+<?php if ($page['navigation']): ?>
+<nav id="navigation" role="navigation" class="container">
+  <div class="container__inner">
+    <div class="grid">
+      <?php print render($page['navigation']); ?>
+    </div>
+  </div>
+</nav>
+<?php endif; ?>
 
-<?php print render($page['top']); ?>
+<?php if ($page['top']): ?>
+<div id="top" class="container">
+  <div class="container__inner">
+    <div class="grid">
+      <?php print render($page['top']); ?>
+    </div>
+  </div>
+</div>
+<?php endif; ?>
 
 <div id="main" class="container">
   <div class="container__inner">
@@ -56,17 +72,63 @@
           <?php endif; ?>
         </header>
 
-        <?php print render($page['content_top']); ?>
-        <?php print render($page['content']); ?>
+        <?php if ($page['content_top']): ?>
+        <div id="content-top class="grid">
+          <?php print render($page['content_top']); ?>
+        </div>
+        <?php endif; ?>
+
+        <?php if ($page['content']): ?>
+        <div id="content" class="grid">
+          <?php print render($page['content']); ?>
+        </div>
+        <?php endif; ?>
+
         <?php print $feed_icons; ?>
-        <?php print render($page['content_bottom']); ?>
+
+        <?php if ($page['content_bottom']): ?>
+        <div id="content-bottom" class="grid">
+          <?php print render($page['content_bottom']); ?>
+        </div>
+        <?php endif; ?>
       </div>
 
-      <?php print render($page['secondary']); ?>
-      <?php print render($page['tertiary']); ?>
+      <?php if ($page['secondary']): ?>
+        <div id="secondary" class="grid__cell">
+          <div class="grid">
+            <?php print render($page['secondary']); ?>
+          </div>
+        </div>
+      <?php endif; ?>
+
+      <?php if ($page['tertiary']): ?>
+        <div id="tertiary" class="grid__cell">
+          <div class="grid">
+            <?php print render($page['tertiary']); ?>
+          </div>
+        </div>
+      <?php endif; ?>
     </div>
   </div>
 </div>
 
-<?php print render($page['bottom']); ?>
-<?php print render($page['footer']); ?>
+
+<?php if ($page['bottom']): ?>
+<div id="bottom" class="container">
+  <div class="container__inner">
+    <div class="grid">
+      <?php print render($page['bottom']); ?>
+    </div>
+  </div>
+</div>
+<?php endif; ?>
+
+<?php if ($page['footer']): ?>
+<footer id="footer" class="container">
+  <div class="container__inner">
+    <div class="grid">
+      <?php print render($page['footer']); ?>
+    </div>
+  </div>
+</footer>
+<?php endif; ?>

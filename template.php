@@ -121,7 +121,6 @@ function minima_html_head_alter(&$head) {
  *   The name of the template being rendered ("page" in this case).
  */
 function minima_preprocess_page(&$variables, $hook) {
-
   // Branding - logo.
   $logo_path = DRUPAL_ROOT . parse_url($variables['logo'], PHP_URL_PATH);
   if (file_exists($logo_path)) {
@@ -146,65 +145,6 @@ function minima_preprocess_page(&$variables, $hook) {
 
   // Branding - slogan.
   $variables['branding_slogan'] = $variables['site_slogan'];
-}
-
-/**
- * Preprocess variables for region.tpl.php
- *
- * @param $variables
- *   An array of variables to pass to the theme template.
- * @param $hook
- *   The name of the template being rendered ("region" in this case).
- */
-function minima_preprocess_region(&$variables, $hook) {
-  $variables['attributes_array']['id'] = drupal_html_id($variables['region']);
-  //$variables['attributes_array']['class'] = $variables['classes_array'];
-
-  // Set default wrapper.
-  $variables['wrapper'] = 'div';
-  $variables['container'] = FALSE;
-  $variables['grid_cell'] = FALSE;
-
-  switch ($variables['region']) {
-    case 'header':
-      $variables['wrapper'] = FALSE;
-      break;
-
-    case 'navigation':
-      $variables['wrapper'] = 'nav';
-      $variables['container'] = TRUE;
-      $variables['attributes_array']['role'] = 'navigation';
-      break;
-
-    case 'secondary':
-    case 'tertiary':
-      $variables['grid_cell'] = TRUE;
-      $variables['attributes_array']['class'][] = 'grid__cell';
-      break;
-
-    case 'top':
-    case 'bottom':
-      $variables['container'] = TRUE;
-      break;
-
-    case 'footer':
-      $variables['wrapper'] = 'footer';
-      $variables['container'] = TRUE;
-      break;
-
-    case 'page_top':
-    case 'page_bottom':
-      array_unshift($variables['theme_hook_suggestions'], 'region__no_wrapper');
-      break;
-  }
-
-  if (!$variables['container'] && !$variables['grid_cell']) {
-    $variables['attributes_array']['class'][] = 'grid';
-  }
-
-  if ($variables['container']) {
-    $variables['attributes_array']['class'][] = 'container';
-  }
 }
 
 /**
