@@ -122,6 +122,30 @@ function minima_html_head_alter(&$head) {
  */
 function minima_preprocess_page(&$variables, $hook) {
 
+  // Branding - logo.
+  $logo_path = DRUPAL_ROOT . parse_url($variables['logo'], PHP_URL_PATH);
+  if (file_exists($logo_path)) {
+    $variables['branding_logo'] = theme('image', array(
+      'path' => $variables['logo'],
+      'alt' => $variables['site_name'] . "'s logo",
+      'title' => NULL,
+      'width' => NULL,
+      'height' => NULL,
+      'attributes' => array('class' => 'branding__logo'),
+    ));
+  }
+  else {
+    $variables['branding_logo'] = '';
+  }
+
+  // Branding - name.
+  $name_wrapper = drupal_is_front_page() ? 'h1' : 'div';
+  $variables['branding_name'] = '<' .$name_wrapper .' class="branding__name">'.
+                                $variables['site_name'] .
+                                '</' .$name_wrapper .'>';
+
+  // Branding - slogan.
+  $variables['branding_slogan'] = $variables['site_slogan'];
 }
 
 /**

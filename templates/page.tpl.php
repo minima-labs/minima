@@ -1,10 +1,12 @@
 <header id="header" role="header" class="container">
   <div class="container__inner">
     <div class="grid">
-      <div id="branding" class="grid__cell">
-        <?php if ($logo) print $logo; ?>
-        <?php if ($site_name) print $site_name; ?>
-        <?php if ($site_slogan) print $site_slogan; ?>
+      <div class="branding grid__cell">
+        <?php print $branding_logo; ?>
+        <?php print $branding_name; ?>
+        <?php if ($branding_slogan): ?>
+          <div class="branding__slogan"><?php print $branding_slogan; ?></div>
+        <?php endif; ?>
       </div>
 
       <?php print render($page['header']); ?>
