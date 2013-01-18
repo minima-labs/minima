@@ -158,7 +158,7 @@ function minima_preprocess_page(&$variables, $hook) {
 function minima_preprocess_block(&$variables, $hook) {
   $block = $variables['block'];
 
-  $variables['attributes_array']['class'] = array('grid__cell', 'box');
+  $variables['attributes_array']['class'] = array('box');
   $variables['title_attributes_array']['class'] = array('box__title');
   $variables['content_attributes_array']['class'] = array('box__content');
   $variables['title'] = !empty($block->subject) ? $block->subject : '';
