@@ -1,5 +1,5 @@
 core = 7.x
-description =
+description = Less is more
 name = Minima
 
 
@@ -14,7 +14,7 @@ stylesheets[all][] = block.css
 stylesheets[all][] = book.css
 stylesheets[all][] = color.css
 stylesheets[all][] = comment.css
-stylesheets[all][] = contextual.css
+;stylesheets[all][] = contextual.css
 stylesheets[all][] = dashboard.css
 stylesheets[all][] = dblog.css
 stylesheets[all][] = field.css
