@@ -2,9 +2,14 @@
 
 .menu__item {
   list-style: none;
+
+  > a {}
+}
+
+.menu--inline {
   padding-left: 0;
 
-  > a {
-
+  .menu__item {
+    .inline-block();
   }
 }
