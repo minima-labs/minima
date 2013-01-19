@@ -248,10 +248,12 @@ function minima_preprocess_menu_tree(&$variables) {
 
   // Merge attributes from the tree (these can be set in hook_block_view_alter).
   // See minima_block_view_alter().
-  $variables['attributes_array'] = array_merge_recursive(
-    $variables['attributes_array'],
-    $variables['tree']['#attributes']
-  );
+  if (!empty($variables['tree']['#attributes'])) {
+    $variables['attributes_array'] = array_merge_recursive(
+      $variables['attributes_array'],
+      $variables['tree']['#attributes']
+    );
+  }
 
   // Set the children (default functionality).
   $variables['tree'] = $variables['tree']['#children'];
