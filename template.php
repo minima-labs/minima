@@ -163,14 +163,6 @@ function minima_preprocess_block(&$variables, $hook) {
   $variables['content_attributes_array']['class'] = array('box__content');
   $variables['title'] = !empty($block->subject) ? $block->subject : '';
 
-  // Add modifier class for menus.
-  if (($block->module == 'system'
-    && in_array($block->delta, array_keys(menu_get_menus())))
-    || in_array($block->module, array('menu', 'menu_block'))
-  ) {
-    $variables['attributes_array']['class'][] = 'box--menu';
-  }
-
   // Add classes to attributes array.
   foreach ($variables['classes_array'] as $class) {
     // Ignore core block classes.
@@ -245,6 +237,72 @@ function minima_preprocess_menu_link(&$variables, $hook) {
  */
 function minima_preprocess_fieldset(&$variables, $hook) {
 
+}
+
+/**
+ * Implements template_preprocess_HOOK() for theme_menu_tree().
+ */
+function minima_preprocess_menu_tree(&$variables) {
+  // Add default class for all menus.
+  $variables['attributes_array']['class'][] = 'menu';
+
+  // Merge attributes from the tree (these can be set in hook_block_view_alter).
+  // See minima_block_view_alter().
+  $variables['attributes_array'] = array_merge_recursive(
+    $variables['attributes_array'],
+    $variables['tree']['#attributes']
+  );
+
+  // Set the children (default functionality).
+  $variables['tree'] = $variables['tree']['#children'];
+}
+
+
+/**
+ * Theme overrides =============================================================
+ */
+
+/**
+ * Overrides theme_menu_tree().
+ */
+function minima_menu_tree($variables) {
+  return '<ul' . drupal_attributes($variables['attributes_array']) . '>' . $variables['tree'] . '</ul>';
+}
+
+
+/**
+ * Alter hooks =================================================================
+ */
+
+/**
+ * Implements hook_theme_registry_alter().
+ */
+function minima_theme_registry_alter(&$theme_registry) {
+  // Unset defaut template_preprocess_menu_tree so we can access other tree
+  // properties (such as #attributes) in our custom implementation.
+  // See minima_preprocess_menu_tree().
+  foreach ($theme_registry['menu_tree']['preprocess functions'] as $key => $value) {
+    if ($value == 'template_preprocess_menu_tree') {
+      unset($theme_registry['menu_tree']['preprocess functions'][$key]);
+    }
+  }
+}
+
+/**
+ * Implements hook_block_view_alter().
+ */
+function minima_block_view_alter(&$data, $block) {
+  // Does this block contain a menu?
+  $is_menu_block = ((
+       $block->module == 'system'
+    && in_array($block->delta, array_keys(menu_get_menus())))
+    || in_array($block->module, array('menu', 'menu_block'))
+  );
+
+  // Add inline modifier class to menu blocks in navigation region.
+  if ($is_menu_block && $block->region == 'navigation') {
+    $data['content']['#attributes']['class'][] = 'menu--inline';
+  }
 }
 
 /**
