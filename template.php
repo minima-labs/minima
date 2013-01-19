@@ -303,7 +303,25 @@ function minima_block_view_alter(&$data, $block) {
 
   // Add inline modifier class to menu blocks in navigation region.
   if ($is_menu_block && $block->region == 'navigation') {
-    $data['content']['#attributes']['class'][] = 'menu--inline';
+    $data['content']['#attributes']['class'][] = 'list--inline';
+  }
+}
+
+/**
+ * Implements hook_node_view_alter().
+ */
+function minima_entity_view_alter(&$build) {
+  // Tidy up classes on node/comment links.
+  if (isset($build['links'])) {
+    $classes = &$build['links']['#attributes']['class'];
+
+    // Add inline list modifier class if this list should be inline.
+    if (in_array('inline', $classes)) {
+      array_unshift($classes, 'list--inline');
+    }
+
+    // Remove core drupal classes.
+    $classes = array_diff($classes, array('links', 'inline'));
   }
 }
 

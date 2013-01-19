@@ -10,6 +10,13 @@ li {
 
   > li {
     .inline-block();
+    .margin(right, 1/2);
+
     list-style: none;
+    vertical-align: middle;
+
+    &:last-child {
+      margin-right: 0;
+    }
   }
 }
