@@ -1,0 +1,11 @@
+/**
+ * Cross browser inline-block
+ *  - http://blog.mozilla.org/webdev/2009/02/20/cross-browser-inline-block/
+ */
+.inline-block() {
+  display: -moz-inline-stack;
+  display: inline-block;
+  *display: inline;
+  vertical-align: top;
+  zoom: 1;
+}
