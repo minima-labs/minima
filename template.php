@@ -276,15 +276,24 @@ function minima_menu_tree($variables) {
  */
 function minima_breadcrumb($variables) {
   if (!empty($variables['breadcrumb'])) {
+    $breadcrumb = $variables['breadcrumb'];
+
+    // Add separators if there is more than one item.
+    if (($count = count($breadcrumb)) > 1) {
+      for ($i = 0; $i < $count - 1; ++$i) {
+        $breadcrumb[$i] .= '<i class="breadcrumb__separator icon--angle-right"></i>';
+      }
+    }
+
     $output = '<nav class="breadcrumb">';
 
     // Provide a navigational heading to give context for breadcrumb links to
-    // screen-reader users. Make the heading invisible with .element-invisible.
-    $output .= '<h2 class="element-invisible">' . t('You are here') . '</h2>';
+    // screen-reader users. Make the heading invisible with .is-invisible.
+    $output .= '<h2 class="is-invisible">' . t('You are here') . '</h2>';
 
     $output .= theme('item_list', array(
       'type' => 'ol',
-      'items' => $variables['breadcrumb'],
+      'items' => $breadcrumb,
       'attributes' => array(
         'class' => 'list--inline',
       ),
