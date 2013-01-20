@@ -320,7 +320,6 @@ function minima_theme_registry_alter(&$theme_registry) {
  */
 function minima_block_view_alter(&$data, $block) {
   // Does this block contain a menu?
-  dpm($block);
   $is_menu_block = ((
        $block->module == 'system'
     && in_array($block->delta, array_keys(menu_get_menus())))
@@ -329,7 +328,14 @@ function minima_block_view_alter(&$data, $block) {
 
   // Add inline modifier class to menu blocks in navigation region.
   if ($is_menu_block && $block->region == 'navigation') {
-    $data['content']['#attributes']['class'][] = 'list--inline';
+    $content = &$data['content'];
+
+    // The menu_block module puts content in #content.
+    if ($block->module == 'menu_block') {
+      $content = $content['#content'];
+    }
+
+    $content['#attributes']['class'][] = 'list--inline';
   }
 }
 
