@@ -271,6 +271,31 @@ function minima_menu_tree($variables) {
   return '<ul' . drupal_attributes($variables['attributes_array']) . '>' . $variables['tree'] . '</ul>';
 }
 
+/**
+ * Overrides theme_breadcrumb().
+ */
+function minima_breadcrumb($variables) {
+  $breadcrumb = $variables['breadcrumb'];
+
+  if (!empty($breadcrumb)) {
+    $output = '<nav id="breadcrumb">';
+
+    // Provide a navigational heading to give context for breadcrumb links to
+    // screen-reader users. Make the heading invisible with .element-invisible.
+    $output .= '<h2 class="element-invisible">' . t('You are here') . '</h2>';
+
+    $output .= theme('item_list', array(
+      'type' => 'ol',
+      'items' => $breadcrumb,
+      'attributes' => array(
+        'class' => 'list--inline',
+      ),
+    )) . '</nav>';
+
+    return $output;
+  }
+}
+
 
 /**
  * Alter hooks =================================================================
@@ -295,6 +320,7 @@ function minima_theme_registry_alter(&$theme_registry) {
  */
 function minima_block_view_alter(&$data, $block) {
   // Does this block contain a menu?
+  dpm($block);
   $is_menu_block = ((
        $block->module == 'system'
     && in_array($block->delta, array_keys(menu_get_menus())))

@@ -41,9 +41,7 @@
         <div id="primary" class="grid__cell">
           <header>
             <?php if ($breadcrumb): ?>
-            <div id="breadcrumb">
               <?php print $breadcrumb; ?>
-            </div>
             <?php endif; ?>
 
             <?php if ($messages): ?>
