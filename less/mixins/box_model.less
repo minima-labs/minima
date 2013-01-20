@@ -15,6 +15,18 @@
 	margin-left: (@ratio * @base-gutter-width) + 0px;
 	margin-left: (@ratio * (@base-gutter-width / @base-font-size)) + 0rem;
 }
+.margin(@side, @ratio: 1) when (@side = horizontal) {
+	.margin(left, @ratio);
+	.margin(right, @ratio);
+}
+.margin(@side, @ratio: 1) when (@side = vertical) {
+	.margin(top, @ratio);
+	.margin(bottom, @ratio);
+}
+.margin(@side, @ratio: 1) when (@side = all) {
+	.margin(horizontal, @ratio);
+	.margin(vertical, @ratio);
+}
 
 // Padding
 .padding(@side, @ratio: 1) when (@side = top) {
@@ -32,4 +44,20 @@
 .padding(@side, @ratio: 1) when (@side = left) {
 	padding-left: (@ratio * @base-gutter-width) + 0px;
 	padding-left: (@ratio * (@base-gutter-width / @base-font-size)) + 0rem;
+}
+.padding(@side, @ratio: 1) when (@side = all) {
+	padding-left: (@ratio * @base-gutter-width) + 0px;
+	padding-left: (@ratio * (@base-gutter-width / @base-font-size)) + 0rem;
+}
+.padding(@side, @ratio: 1) when (@side = horizontal) {
+	.padding(left, @ratio);
+	.padding(right, @ratio);
+}
+.padding(@side, @ratio: 1) when (@side = vertical) {
+	.padding(top, @ratio);
+	.padding(bottom, @ratio);
+}
+.padding(@side, @ratio: 1) when (@side = all) {
+	.padding(horizontal, @ratio);
+	.padding(vertical, @ratio);
 }
