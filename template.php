@@ -278,7 +278,7 @@ function minima_breadcrumb($variables) {
   $breadcrumb = $variables['breadcrumb'];
 
   if (!empty($breadcrumb)) {
-    $output = '<nav id="breadcrumb">';
+    $output = '<nav id="breadcrumb" role="breadcrumb">';
 
     // Provide a navigational heading to give context for breadcrumb links to
     // screen-reader users. Make the heading invisible with .element-invisible.
