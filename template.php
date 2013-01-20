@@ -275,10 +275,8 @@ function minima_menu_tree($variables) {
  * Overrides theme_breadcrumb().
  */
 function minima_breadcrumb($variables) {
-  $breadcrumb = $variables['breadcrumb'];
-
-  if (!empty($breadcrumb)) {
-    $output = '<nav id="breadcrumb" role="breadcrumb">';
+  if (!empty($variables['breadcrumb'])) {
+    $output = '<nav class="breadcrumb">';
 
     // Provide a navigational heading to give context for breadcrumb links to
     // screen-reader users. Make the heading invisible with .element-invisible.
@@ -286,7 +284,7 @@ function minima_breadcrumb($variables) {
 
     $output .= theme('item_list', array(
       'type' => 'ol',
-      'items' => $breadcrumb,
+      'items' => $variables['breadcrumb'],
       'attributes' => array(
         'class' => 'list--inline',
       ),
