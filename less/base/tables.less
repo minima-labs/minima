@@ -1,3 +1,28 @@
 table {
   width: 100%;
+
+  thead th {
+    text-align: left;
+    vertical-align: bottom;
+    border-bottom: 3px solid @table-border-colour;
+  }
+
+  tbody {
+    th {
+      text-align: right;
+      border-right: 1px solid @table-border-colour;
+    }
+    th, td {
+      vertical-align: top;
+      border-top: 1px solid @table-border-colour;
+    }
+  }
+
+  &.table--zebra {
+    tbody {
+      tr:nth-child(even) td {
+        background-color: @table-background-colour;
+      }
+    }
+  }
 }
