@@ -319,23 +319,25 @@ function minima_theme_registry_alter(&$theme_registry) {
  * Implements hook_block_view_alter().
  */
 function minima_block_view_alter(&$data, $block) {
-  // Does this block contain a menu?
-  $is_menu_block = ((
-       $block->module == 'system'
-    && in_array($block->delta, array_keys(menu_get_menus())))
-    || in_array($block->module, array('menu', 'menu_block'))
-  );
-
   // Add inline modifier class to menu blocks in navigation region.
-  if ($is_menu_block && $block->region == 'navigation') {
-    $content = &$data['content'];
+  if ($block->region == 'navigation') {
+    // Does this block contain a menu?
+    $is_menu_block = ((
+         $block->module == 'system'
+      && in_array($block->delta, array_keys(menu_get_menus())))
+      || in_array($block->module, array('menu', 'menu_block'))
+    );
 
-    // The menu_block module puts content in #content.
-    if ($block->module == 'menu_block') {
-      $content = $content['#content'];
+    if ($is_menu_block) {
+      $content = &$data['content'];
+
+      // The menu_block module puts content in #content.
+      if ($block->module == 'menu_block') {
+        $content = $content['#content'];
+      }
+
+      $content['#attributes']['class'][] = 'list--inline';
     }
-
-    $content['#attributes']['class'][] = 'list--inline';
   }
 }
 
