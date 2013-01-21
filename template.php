@@ -275,10 +275,17 @@ function minima_menu_tree($variables) {
  * Overrides theme_breadcrumb().
  */
 function minima_breadcrumb($variables) {
-  $breadcrumb = $variables['breadcrumb'];
+  if (!empty($variables['breadcrumb'])) {
+    $breadcrumb = $variables['breadcrumb'];
 
-  if (!empty($breadcrumb)) {
-    $output = '<nav id="breadcrumb" role="breadcrumb">';
+    // Add separators if there is more than one item.
+    if (($count = count($breadcrumb)) > 1) {
+      for ($i = 0; $i < $count - 1; ++$i) {
+        $breadcrumb[$i] .= '<i class="breadcrumb__separator icon--angle-right"></i>';
+      }
+    }
+
+    $output = '<nav class="breadcrumb">';
 
     // Provide a navigational heading to give context for breadcrumb links to
     // screen-reader users. Make the heading invisible with .is-invisible.
