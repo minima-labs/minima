@@ -318,7 +318,7 @@ function minima_breadcrumb($variables) {
  */
 function minima_menu_local_tasks(&$variables) {
   $output = '';
-  
+
   if (!empty($variables['primary'])) {
     $variables['primary']['#prefix'] = '<h2 class="is-invisible">' . t('Primary tabs') . '</h2>';
     $variables['primary']['#prefix'] .= '<ul class="tabs__nav">';
@@ -327,7 +327,7 @@ function minima_menu_local_tasks(&$variables) {
   }
   if (!empty($variables['secondary'])) {
     $variables['secondary']['#prefix'] = '<h2 class="is-invisible">' . t('Secondary tabs') . '</h2>';
-    $variables['secondary']['#prefix'] .= '<ul class="tabs__nav">';
+    $variables['secondary']['#prefix'] .= '<ul class="list--inline">';
     $variables['secondary']['#suffix'] = '</ul>';
     $output .= drupal_render($variables['secondary']);
   }
@@ -367,9 +367,7 @@ function minima_menu_local_task($variables) {
   }
 
   // Tab attributes.
-  $attributes_array = array(
-    'class' => array('tabs__tab')
-  );
+  $attributes_array = array();
   if (!empty($variables['element']['#active'])) {
     $attributes_array['class'][] = 'is-active';
   }
