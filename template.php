@@ -318,7 +318,7 @@ function minima_breadcrumb($variables) {
  */
 function minima_menu_local_tasks(&$variables) {
   $output = '';
-dpm($variables['primary']);
+  
   if (!empty($variables['primary'])) {
     $variables['primary']['#prefix'] = '<h2 class="is-invisible">' . t('Primary tabs') . '</h2>';
     $variables['primary']['#prefix'] .= '<ul class="tabs__nav">';
