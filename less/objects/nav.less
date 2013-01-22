@@ -1,0 +1,62 @@
+.nav {
+  list-style: none;
+  padding: 0;
+
+  > li {
+    .inline-block();
+
+    > a {
+      .padding(horizontal, 1/2);
+
+      display: block;
+    }
+  }
+
+  > .is-active {
+    > a,
+    > a:hover {
+      cursor: default;
+    }
+  }
+}
+
+
+.nav--tabs {
+  border-bottom: 1px solid @tabs-border-color;
+
+  > li {
+    margin-bottom: -1px;
+
+    > a {
+      border: 1px solid transparent;
+      line-height: 3;
+    }
+  }
+
+  > .is-active {
+    > a,
+    > a:hover {
+      background-color: @tabs-background-color;
+      border: 1px solid @tabs-border-color;
+      border-bottom-color: transparent;
+    }
+  }
+}
+
+.nav--pills {
+  > li {
+     > a {
+      line-height: 2;
+    }
+  }
+
+  > .is-active {
+    > a,
+    > a:hover {
+      .border-radius(5px);
+
+      color: #ffffff;
+      background-color: #0088cc;
+    }
+  }
+}

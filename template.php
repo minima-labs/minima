@@ -205,7 +205,7 @@ function minima_preprocess_comment(&$variables, $hook) {
  *   The name of the template being rendered ("comment" in this case).
  */
 function minima_preprocess_menu_link(&$variables, $hook) {
-  $classes = array('menu__item');
+  $classes = array();
 
   // Prepend state classes with 's-' and remove others.
   foreach ($variables['element']['#attributes']['class'] as $class) {
@@ -244,7 +244,7 @@ function minima_preprocess_fieldset(&$variables, $hook) {
  */
 function minima_preprocess_menu_tree(&$variables) {
   // Add default class for all menus.
-  $variables['attributes_array']['class'][] = 'menu';
+  $variables['attributes_array']['class'][] = 'nav';
 
   // Merge attributes from the tree (these can be set in hook_block_view_alter).
   // See minima_block_view_alter().
@@ -321,13 +321,13 @@ function minima_menu_local_tasks(&$variables) {
 
   if (!empty($variables['primary'])) {
     $variables['primary']['#prefix'] = '<h2 class="is-invisible">' . t('Primary tabs') . '</h2>';
-    $variables['primary']['#prefix'] .= '<ul class="tabs__nav">';
+    $variables['primary']['#prefix'] .= '<ul class="nav nav--tabs">';
     $variables['primary']['#suffix'] = '</ul>';
     $output .= drupal_render($variables['primary']);
   }
   if (!empty($variables['secondary'])) {
     $variables['secondary']['#prefix'] = '<h2 class="is-invisible">' . t('Secondary tabs') . '</h2>';
-    $variables['secondary']['#prefix'] .= '<ul class="list--inline">';
+    $variables['secondary']['#prefix'] .= '<ul class="nav nav--pills">';
     $variables['secondary']['#suffix'] = '</ul>';
     $output .= drupal_render($variables['secondary']);
   }
