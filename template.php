@@ -376,6 +376,44 @@ function minima_menu_local_task($variables) {
 }
 
 /**
+ * Overrides theme_status_messages().
+ */
+function minima_status_messages($variables) {
+  $display = $variables['display'];
+  $output = '';
+
+  $status_heading = array(
+    'status' => t('Status message'),
+    'error' => t('Error message'),
+    'warning' => t('Warning message'),
+  );
+
+  foreach (drupal_get_messages($display) as $type => $messages) {
+    $output .= "<div class=\"messages messages--$type\">\n";
+    if (!empty($status_heading[$type])) {
+      $output .= '<h2 class="is-invisible">' . $status_heading[$type] . "</h2>\n";
+    }
+    if (count($messages) > 1) {
+      $output .= " <ul>\n";
+      foreach ($messages as $message) {
+        $output .= '  <li>' . $message . "</li>\n";
+      }
+      $output .= " </ul>\n";
+    }
+    else {
+      $output .= $messages[0];
+    }
+    $output .= "</div>\n";
+  }
+
+  if (!empty($output)) {
+    $output = '<div id="messages">' . $output . '</div>';
+  }
+
+  return $output;
+}
+
+/**
  * Alter hooks =================================================================
  */
 
@@ -441,5 +479,14 @@ function minima_entity_view_alter(&$build) {
  * Implements hook_page_alter().
  */
 function minima_page_alter(&$page) {
-  //dpm($page);
+  drupal_set_message('Notice message', 'status');
+
+  drupal_set_message(t('Notice message with a !link inside', array(
+    '!link' => l(
+      'link', ''
+    ),
+  )), 'status');
+
+  drupal_set_message('Warning message', 'warning');
+  drupal_set_message('Error message', 'error');
 }
