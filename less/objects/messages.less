@@ -1,0 +1,40 @@
+.messages {
+  .border-radius(3px);
+  .margin(bottom, 1/2);
+  .padding(all, 1/4);
+
+  text-shadow: 0 1px 0 rgba(255, 255, 255, .5);
+  border: 1px solid;
+
+  a {
+    color: inherit;
+    text-decoration: underline;
+  }
+
+  ul {
+    margin: 0;
+    padding: 0;
+
+    li {
+      list-style-position: inside;
+    }
+  }
+}
+
+.messages--status {
+  background-color: @messages-status-background-color;
+  border-color: @messages-status-border-color;
+  color: @messages-status-text-color;
+}
+
+.messages--warning {
+  background-color: @messages-warning-background-color;
+  border-color: @messages-warning-border-color;
+  color: @messages-warning-text-color;
+}
+
+.messages--error {
+  background-color: @messages-error-background-color;
+  border-color: @messages-error-border-color;
+  color: @messages-error-text-color;
+}
