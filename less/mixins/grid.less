@@ -1,6 +1,13 @@
 .grid-item(@width_ratio: 1, @offset_ratio: 0) {
   width: @width_ratio * 100%;
 }
+
 .grid-item(@width_ratio: 1, @offset_ratio: 0) when not (@offset_ratio = 0) {
   left: @offset_ratio * 100%;
+}
+
+.grid-setup(@namespace) {
+  .width-setup(@namespace);
+  .push-setup(@namespace);
+  .pull-setup(@namespace);
 }

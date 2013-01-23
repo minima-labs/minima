@@ -38,7 +38,7 @@
   <div id="main" class="container">
     <div class="container__inner">
       <div class="grid">
-        <div id="primary" class="grid__cell">
+        <div id="primary" class="grid__cell<?php print $primary_classes; ?>">
           <header>
             <?php if ($breadcrumb): ?>
               <?php print $breadcrumb; ?>
@@ -93,7 +93,7 @@
         </div>
 
         <?php if ($page['secondary']): ?>
-          <div id="secondary" class="grid__cell">
+          <div id="secondary" class="grid__cell<?php print $secondary_classes; ?>">
             <div class="grid">
               <?php print render($page['secondary']); ?>
             </div>
@@ -101,7 +101,7 @@
         <?php endif; ?>
 
         <?php if ($page['tertiary']): ?>
-          <div id="tertiary" class="grid__cell">
+          <div id="tertiary" class="grid__cell<?php print $tertiary_classes; ?>">
             <div class="grid">
               <?php print render($page['tertiary']); ?>
             </div>

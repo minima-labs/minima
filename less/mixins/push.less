@@ -1,0 +1,64 @@
+.push-setup(@namespace: "") {
+  // Whole
+  (~'.@{namespace}push--one-whole')         { left: 100%; }
+
+  // Halves
+  (~'.@{namespace}push--one-half'),
+  (~'.@{namespace}push--two-quarters'),
+  (~'.@{namespace}push--three-sixths'),
+  (~'.@{namespace}push--four-eighths'),
+  (~'.@{namespace}push--five-tenths'),
+  (~'.@{namespace}push--six-twelfths')      { left: 50%; }
+
+  // Thirds
+  (~'.@{namespace}push--one-third'),
+  (~'.@{namespace}push--two-sixths'),
+  (~'.@{namespace}push--four-twelfths')     { left: 33.333%; }
+  (~'.@{namespace}push--two-thirds'),
+  (~'.@{namespace}push--four-sixths'),
+  (~'.@{namespace}push--eight-twelfths')    { left: 66.666%; }
+
+  // Quarters
+  (~'.@{namespace}push--one-quarter'),
+  (~'.@{namespace}push--two-eighths'),
+  (~'.@{namespace}push--three-twelfths')    { left: 25%; }
+  (~'.@{namespace}push--three-quarters'),
+  (~'.@{namespace}push--six-eighths'),
+  (~'.@{namespace}push--nine-twelfths')     { left: 75%; }
+
+  // Fifths
+  (~'.@{namespace}push--one-fifth'),
+  (~'.@{namespace}push--two-tenths')        { left: 20%; }
+  (~'.@{namespace}push--two-fifths'),
+  (~'.@{namespace}push--four-tenths')       { left: 40%; }
+  (~'.@{namespace}push--three-fifths'),
+  (~'.@{namespace}push--six-tenths')        { left: 60%; }
+  (~'.@{namespace}push--four-fifths'),
+  (~'.@{namespace}push--eight-tenths')      { left: 80%; }
+
+  // Sixths
+  (~'.@{namespace}push--one-sixth'),
+  (~'.@{namespace}push--two-twelfths')      { left: 16.666%; }
+  (~'.@{namespace}push--five-sixths'),
+  (~'.@{namespace}push--ten-twelfths')      { left: 83.333%; }
+
+  // Eighths
+  (~'.@{namespace}push--one-eighth')        { left: 12.5%; }
+  (~'.@{namespace}push--three-eighths')     { left: 37.5%; }
+  (~'.@{namespace}push--five-eighths')      { left: 62.5%; }
+  (~'.@{namespace}push--seven-eighths')     { left: 87.5%; }
+
+  // Tenths
+  (~'.@{namespace}push--one-tenth')         { left: 10%; }
+  (~'.@{namespace}push--three-tenths')      { left: 30%; }
+  (~'.@{namespace}push--seven-tenths')      { left: 70%; }
+  (~'.@{namespace}push--nine-tenths')       { left: 90%; }
+
+  // Twelfths
+  (~'.@{namespace}push--one-twelfth')       { left: 8.333%; }
+  (~'.@{namespace}push--five-twelfths')     { left: 41.666% }
+  (~'.@{namespace}push--seven-twelfths')    { left: 58.333%; }
+  (~'.@{namespace}push--eleven-twelfths')   { left: 91.666%; }
+}
+
+.push-setup();

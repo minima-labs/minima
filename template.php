@@ -145,6 +145,26 @@ function minima_preprocess_page(&$variables, $hook) {
 
   // Branding - slogan.
   $variables['branding_slogan'] = $variables['site_slogan'];
+
+  // Layout classes
+  $variables['primary_classes'] = '';
+  $variables['secondary_classes'] = ' desk--one-quarter lap--one-third';
+  $variables['tertiary_classes'] = ' desk--one-quarter desk--pull--three-quarters';
+
+  if ($variables['page']['secondary'] && $variables['page']['tertiary']) {
+    $variables['primary_classes'] = ' desk--one-half';
+  }
+  elseif ($variables['page']['secondary'] || $variables['page']['tertiary']) {
+    $variables['primary_classes'] = ' desk--three-quarters';
+  }
+
+  if ($variables['page']['secondary']) {
+    $variables['primary_classes'] .= ' lap--two-thirds';
+  }
+  if ($variables['page']['tertiary']) {
+    $variables['primary_classes'] .= ' desk--push--one-quarter';
+    $variables['secondary_classes'] .= ' desk--push--one-quarter';
+  }
 }
 
 /**
