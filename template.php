@@ -409,7 +409,7 @@ function minima_status_messages($variables) {
   );
 
   foreach (drupal_get_messages($display) as $type => $messages) {
-    $output .= "<div class=\"messages messages--$type\">\n";
+    $output .= "<div class=\"messages is-$type\">\n";
     if (!empty($status_heading[$type])) {
       $output .= '<h2 class="is-invisible">' . $status_heading[$type] . "</h2>\n";
     }
