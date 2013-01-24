@@ -1,5 +1,6 @@
 .messages {
   .border-radius(3px);
+  .clearfix();
   .margin(bottom, 1/2);
   .padding(all, 1/4);
 
@@ -11,12 +12,15 @@
     text-decoration: underline;
   }
 
-  ul {
+  > ul {
     margin: 0;
-    padding: 0;
-
-    li {
-      list-style-position: inside;
-    }
   }
+}
+
+.messages__content {
+  .margin(left, 1/2);
+}
+
+.messages__icon {
+  float: left;
 }

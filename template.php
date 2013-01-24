@@ -408,20 +408,29 @@ function minima_status_messages($variables) {
     'warning' => t('Warning message'),
   );
 
+  $icon_class = array(
+    'status' => 'icon--info-sign',
+    'error' => 'icon--exclamation-sign',
+    'warning' => 'icon--warning-sign',
+  );
+
   foreach (drupal_get_messages($display) as $type => $messages) {
     $output .= "<div class=\"messages is-$type\">\n";
     if (!empty($status_heading[$type])) {
       $output .= '<h2 class="is-invisible">' . $status_heading[$type] . "</h2>\n";
     }
+    if (!empty($icon_class[$type])) {
+      $output .= '<i class="messages__icon ' . $icon_class[$type] . '"></i>';
+    }
     if (count($messages) > 1) {
-      $output .= " <ul>\n";
+      $output .= " <ul class=\"messages__content\">\n";
       foreach ($messages as $message) {
         $output .= '  <li>' . $message . "</li>\n";
       }
       $output .= " </ul>\n";
     }
     else {
-      $output .= $messages[0];
+      $output .= '<div class="messages__content">' . $messages[0] . '</div>';
     }
     $output .= "</div>\n";
   }
@@ -432,6 +441,7 @@ function minima_status_messages($variables) {
 
   return $output;
 }
+
 
 /**
  * Alter hooks =================================================================
