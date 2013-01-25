@@ -1,0 +1,48 @@
+button,
+.button,
+input[type=submit] {
+  display: inline-block;
+  border: 2px solid @colour-primary-dark;
+  background: @colour-primary;
+  text-decoration: none;
+  font-family: @headings-font-family;
+  font-weight: bold;
+  color: #fff;
+
+  .margin(bottom);
+  .padding(all, 1/4);
+  .border-radius(5px);
+  .transition(box-shadow .1s);
+
+  &:focus,
+  &:active {
+    outline: none;
+    .box-shadow(inset 0 3px 5px 0 rgb(0,0,0,.4));
+  }
+
+  &[disabled] {
+    background: @colour-neutral-lighter !important;
+    border-color: @colour-neutral !important;
+    color: @colour-neutral !important;
+    .box-shadow(none);
+  }
+}
+
+.button--link {
+  border: none;
+  background: none;
+  color: inherit;
+
+  &:focus,
+  &:active {
+    .box-shadow(none);
+    position: relative;
+    top: 1px;
+    left: 1px;
+  }
+}
+
+.link--button {
+  display: inline-block;
+  .padding(all, 1/4);
+}

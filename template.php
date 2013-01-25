@@ -509,7 +509,7 @@ function minima_entity_view_alter(&$build) {
  * Implements hook_page_alter().
  */
 function minima_page_alter(&$page) {
-  drupal_set_message('Notice message', 'status');
+  /*drupal_set_message('Notice message', 'status');
 
   drupal_set_message(t('Notice message with a !link inside', array(
     '!link' => l(
@@ -518,5 +518,5 @@ function minima_page_alter(&$page) {
   )), 'status');
 
   drupal_set_message('Warning message', 'warning');
-  drupal_set_message('Error message', 'error');
+  drupal_set_message('Error message', 'error');*/
 }
