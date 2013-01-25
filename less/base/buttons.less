@@ -2,17 +2,21 @@
 button,
 input[type=submit] {
   display: inline-block;
-  border: 2px solid @colour-primary-dark;
+  border: 1px solid @colour-primary-dark;
   background: @colour-primary;
   text-decoration: none;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
   font-family: @headings-font-family;
   font-weight: bold;
   color: #fff;
 
   .margin(bottom);
+  .margin(right, 1/4);
   .padding(all, 1/4);
   .border-radius(5px);
   .transition(box-shadow .1s);
+  .box-shadow(0 1px 3px rgba(0, 0, 0, 0.5));
+  .gradient(@colour-primary-lighter, @colour-primary, vertical);
 
   &:focus,
   &:active {
@@ -24,6 +28,7 @@ input[type=submit] {
     background: @colour-neutral-lighter !important;
     border-color: @colour-neutral !important;
     color: @colour-neutral !important;
+    text-shadow: none;
     .box-shadow(none);
   }
 }
@@ -38,6 +43,8 @@ a:visited.button {
   border: none;
   background: none;
   color: inherit;
+  text-shadow: none;
+  .box-shadow(none);
 
   &:focus,
   &:active {
