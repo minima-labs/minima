@@ -1,65 +1,65 @@
-@base-font-size:          14;
-@base-font-ratio:         1.2;
-@base-font-family:        "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
-@base-font-colour:        #263E4B;
+@base-font-size:            14;
+@base-font-ratio:           1.2;
+@base-font-family:          "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+@base-font-colour:          #263E4B;
 
-@base-line-ratio:         1.618;
-@base-line-width:         400;
-@base-line-height:        @base-font-size * (@base-line-ratio - ((1 / (2 * @base-line-ratio)) * (1 - (@base-line-width / (@base-font-size * @base-line-ratio * @base-font-size * @base-line-ratio)))));
+@base-line-ratio:           1.618;
+@base-line-width:           400;
+@base-line-height:          @base-font-size * (@base-line-ratio - ((1 / (2 * @base-line-ratio)) * (1 - (@base-line-width / (@base-font-size * @base-line-ratio * @base-font-size * @base-line-ratio)))));
 
-@base-gutter-width:       40;
+@base-gutter-width:         40;
 
-@headings-font-family:    "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+@headings-font-family:      "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
 
 // Colours.
-@colour-primary:          #2991CB;
-@colour-primary-light:    lighten(@colour-primary, 10%);
-@colour-primary-lighter:  lighten(@colour-primary, 20%);
-@colour-primary-dark:     darken(@colour-primary, 10%);
-//@colour-primary-darker:
+@colour-primary:            #2991CB;
+@colour-primary-light:      lighten(@colour-primary, 10%);
+@colour-primary-lighter:    lighten(@colour-primary, 20%);
+@colour-primary-dark:       darken(@colour-primary, 10%);
+@colour-primary-darker:     darken(@colour-primary, 20%);
 
-@colour-neutral:          #CCCCCC;
-@colour-neutral-light:    #D6D6D6;
-@colour-neutral-lighter:  #F2F2F2;
-@colour-neutral-dark:     #898989;
-@colour-neutral-darker:   #333333;
+@colour-neutral:            #CCCCCC;
+@colour-neutral-light:      #D6D6D6;
+@colour-neutral-lighter:    #F2F2F2;
+@colour-neutral-dark:       #898989;
+@colour-neutral-darker:     #333333;
 
 // Links.
-@link-colour:             @colour-primary;
-@link-colour-visited:     @colour-primary;
-@link-colour-hover:       #265F7E;
-@link-colour-focus:       #6AAED4;
-@link-colour-active:      #D44049;
+@link-colour:               @colour-primary;
+@link-colour-visited:       @colour-primary;
+@link-colour-hover:         #265F7E;
+@link-colour-focus:         #6AAED4;
+@link-colour-active:        #D44049;
 
 // Tables.
-@table-background-colour: #DDE8EE;
+@table-background-colour:   #DDE8EE;
 
 // Tabs.
-@tabs-border-color:       #DDD;
-@tabs-background-color:   #FFF;
+@tabs-border-color:         #DDD;
+@tabs-background-color:     #FFF;
 
 // States.
-@status-background-color:  #DFF0D8;
-@status-border-color:      darken(@status-background-color, 15%);
-@status-text-color:        darken(@status-border-color, 25%);
+@status-background-color:   #DFF0D8;
+@status-border-color:       darken(@status-background-color, 15%);
+@status-text-color:         darken(@status-border-color, 25%);
 
-@warning-background-color: #FCF8E3;
-@warning-border-color:     darken(@warning-background-color, 15%);
-@warning-text-color:       darken(@warning-border-color, 25%);
+@warning-background-color:  #FCF8E3;
+@warning-border-color:      darken(@warning-background-color, 15%);
+@warning-text-color:        darken(@warning-border-color, 25%);
 
-@error-background-color:   #F2DEDE;
-@error-border-color:       darken(@error-background-color, 15%);
-@error-text-color:         darken(@error-border-color, 25%);
+@error-background-color:    #F2DEDE;
+@error-border-color:        darken(@error-background-color, 15%);
+@error-text-color:          darken(@error-border-color, 25%);
 
 // Variables in media queries are currently broken in lessphp v.0.3.8. As soon
 // as the following issue is resolved theses variables will be usable:
 //  - https://github.com/leafo/lessphp/issues/335
-@lap-start:               481px;
-@desk-start:              1024px;
-@palm-end:                @lap-start - 1px;
-@lap-end:                 @desk-start - 1px;
+@lap-start:                 481px;
+@desk-start:                1024px;
+@palm-end:                  @lap-start - 1px;
+@lap-end:                   @desk-start - 1px;
 
-@palm:                    ~"only screen and (max-width: @{palm-end})";
-@lap:                     ~"only screen and (min-width: @{lap-start}) and (max-width: @{lap-end})";
-@portable:                ~"only screen and (max-width: @{lap-end})";
-@desk:                    ~"only screen and (min-width: @{desk-start})";
+@palm:                      ~"only screen and (max-width: @{palm-end})";
+@lap:                       ~"only screen and (min-width: @{lap-start}) and (max-width: @{lap-end})";
+@portable:                  ~"only screen and (max-width: @{lap-end})";
+@desk:                      ~"only screen and (min-width: @{desk-start})";
