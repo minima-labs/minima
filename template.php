@@ -305,19 +305,16 @@ function minima_breadcrumb($variables) {
       }
     }
 
-    $output = '<nav class="breadcrumb">';
+    $output = '<div class="breadcrumb">';
 
     // Provide a navigational heading to give context for breadcrumb links to
     // screen-reader users. Make the heading invisible with .is-invisible.
     $output .= '<h2 class="is-invisible">' . t('You are here') . '</h2>';
 
     $output .= theme('item_list', array(
-      'type' => 'ol',
       'items' => $breadcrumb,
-      'attributes' => array(
-        'class' => 'list--inline',
-      ),
-    )) . '</nav>';
+      'type' => 'ol',
+    )) . '</div>';
 
     return $output;
   }
@@ -420,7 +417,7 @@ function minima_status_messages($variables) {
       $output .= '<h2 class="is-invisible">' . $status_heading[$type] . "</h2>\n";
     }
     if (!empty($icon_class[$type])) {
-      $output .= '<i class="messages__icon ' . $icon_class[$type] . '"></i>';
+      $output .= '<i class="messages__icon ' . $icon_class[$type] . "\"></i>\n";
     }
     if (count($messages) > 1) {
       $output .= " <ul class=\"messages__content\">\n";
