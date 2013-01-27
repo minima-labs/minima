@@ -60,7 +60,11 @@
             </div>
             <?php endif; ?>
 
-            <?php print render($page['help']); ?>
+            <?php if ($page['help']): ?>
+            <div id="help" class="grid">
+              <?php print render($page['help']); ?>
+            </div>
+            <?php endif; ?>
 
             <?php if ($action_links): ?>
               <ul class="action-links">
@@ -70,7 +74,7 @@
           </header>
 
           <?php if ($page['content_top']): ?>
-          <div id="content-top class="grid">
+          <div id="content-top" class="grid">
             <?php print render($page['content_top']); ?>
           </div>
           <?php endif; ?>
