@@ -493,6 +493,7 @@ function minima_status_messages($variables) {
  */
 function minima_form_element($variables) {
   $element = &$variables['element'];
+
   // This is also used in the installer, pre-database setup.
   $t = get_t();
 
@@ -506,50 +507,48 @@ function minima_form_element($variables) {
   if (isset($element['#markup']) && !empty($element['#id'])) {
     $attributes['id'] = $element['#id'];
   }
-  // Add element's #type and #name as class to aid with JS/CSS selectors.
   $attributes['class'] = array('form-item');
-  //if (!empty($element['#type'])) {
-  //  $attributes['class'][] = 'form-type-' . strtr($element['#type'], '_', '-');
-  //}
-  //if (!empty($element['#name'])) {
-  //  $attributes['class'][] = 'form-item-' . strtr($element['#name'], array(' ' => '-', '_' => '-', '[' => '-', ']' => ''));
-  //}
-  // Add a class for disabled elements to facilitate cross-browser styling.
-  //if (!empty($element['#attributes']['disabled'])) {
-  //  $attributes['class'][] = 'form-disabled';
-  //}
-  $output = '<div' . drupal_attributes($attributes) . '>' . "\n";
 
   // If #title is not set, we don't display any label or required marker.
   if (!isset($element['#title'])) {
     $element['#title_display'] = 'none';
   }
-  $prefix = isset($element['#field_prefix']) ? '<span class="field-prefix">' . $element['#field_prefix'] . '</span> ' : '';
-  $suffix = isset($element['#field_suffix']) ? ' <span class="field-suffix">' . $element['#field_suffix'] . '</span>' : '';
 
-  switch ($element['#title_display']) {
-    case 'before':
-    case 'invisible':
-      $output .= ' ' . theme('form_element_label', $variables);
-      $output .= ' ' . $prefix . $element['#children'] . $suffix . "\n";
-      break;
+  $prefix = '';
+  $suffix = '';
+  $field_attributes = array('class' => array('form-item__field'));
+  foreach (array('prefix', 'suffix') as $fix) {
+    if (!empty($element["#field_$fix"])) {
+      if ($element["#field_$fix"] == strip_tags($element["#field_$fix"])) {
+        $field_attributes['class'][] = 'form-item__field--' . $fix;
+        $$fix = '<span class="field-item__' . $fix . '">' . trim($element["#field_$fix"]) . '</span> ';
+      }
+      else {
+        $$fix = $element["#field_$fix"];
+      }
+    }
+  }
 
-    case 'after':
-      $output .= ' ' . $prefix . $element['#children'] . $suffix;
-      $output .= ' ' . theme('form_element_label', $variables) . "\n";
-      break;
+  $output = '<div' . drupal_attributes($attributes) . '>';
 
-    case 'none':
-    case 'attribute':
-      // Output no label and no required marker, only the children.
-      $output .= ' ' . $prefix . $element['#children'] . $suffix . "\n";
-      break;
+  if (in_array($element['#title_display'], array('before', 'invisible'))) {
+    $output .= '  ' . theme('form_element_label', $variables);
+  }
+
+  $output .= '<div' . drupal_attributes($field_attributes) . '>' . "\n";
+
+  $output .= '  ' . $prefix . $element['#children'] . $suffix . "\n";
+
+
+  if ($element['#title_display'] == 'after') {
+    $output .= '  ' . theme('form_element_label', $variables) . "\n";
   }
 
   if (!empty($element['#description'])) {
     $output .= '<div class="form-item__help">' . $element['#description'] . "</div>\n";
   }
 
+  $output .= "</div>";
   $output .= "</div>\n";
 
   return $output;
@@ -612,10 +611,10 @@ function minima_form_element_label($variables) {
 
   $title = filter_xss_admin($element['#title']);
 
-  $attributes = array();
+  $attributes = array('class' => array('form-item__label'));
   // Style the label as class option to display inline with the element.
   if ($element['#title_display'] == 'after') {
-    $attributes['class'] = 'option';
+    $attributes['class'] = 'form-item__label--option';
   }
   // Show label only to screen readers to avoid disruption in visual flows.
   elseif ($element['#title_display'] == 'invisible') {
@@ -626,8 +625,7 @@ function minima_form_element_label($variables) {
     $attributes['for'] = $element['#id'];
   }
 
-  // The leading whitespace helps visually separate fields from inline labels.
-  return ' <label' . drupal_attributes($attributes) . '>' . $t('!title !required', array('!title' => $title, '!required' => $required)) . "</label>\n";
+  return '<label' . drupal_attributes($attributes) . '>' . $t('!title !required', array('!title' => $title, '!required' => $required)) . "</label>";
 }
 
 
