@@ -2,6 +2,16 @@
   list-style: none;
   padding: 0;
 
+  > .is-active {
+    > a,
+    > a:hover {
+      cursor: default;
+    }
+  }
+}
+
+.nav--tabs,
+.nav--pills {
   > li {
     .inline-block();
 
@@ -11,15 +21,7 @@
       display: block;
     }
   }
-
-  > .is-active {
-    > a,
-    > a:hover {
-      cursor: default;
-    }
-  }
 }
-
 
 .nav--tabs {
   border-bottom: 1px solid @tabs-border-color;
