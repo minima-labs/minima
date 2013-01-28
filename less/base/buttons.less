@@ -2,8 +2,8 @@
 button,
 input[type=submit] {
   display: inline-block;
-  border: 1px solid @colour-primary-dark;
-  background: @colour-primary;
+  border: 1px solid @colour-primary;
+  background-color: @colour-primary;
   text-decoration: none;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
   font-family: @headings-font-family;
@@ -12,15 +12,15 @@ input[type=submit] {
   .margin(bottom);
   .margin(right, 1/4);
   .padding(all, 1/4);
-  .border-radius(5px);
+  .border-radius(3px);
   .transition(box-shadow .1s);
-  .box-shadow(0 1px 3px rgba(0, 0, 0, 0.5));
-  .gradient(@colour-primary-lighter, @colour-primary, vertical);
+  .box-shadow(0 1px 3px rgba(0, 0, 0, 0.4));
+  .gradient(rgba(255,255,255,.3), rgba(255,255,255,0), vertical);
 
   &:focus,
   &:active {
     outline: none;
-    .box-shadow(inset 0 3px 5px 0 rgb(0, 0, 0, .4));
+    .box-shadow(inset 0 3px 5px 0 rgb(0, 0, 0, .2));
   }
 
   &[disabled] {
