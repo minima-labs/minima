@@ -750,7 +750,7 @@ function minima_menu_local_action($variables) {
 
   // Add plus icon.
   $options['html'] = TRUE;
-  $link['title'] = '<span class="icon--plus' . $icon .'"></span> ' . $link['title'];
+  $link['title'] = '<span class="icon--plus"></span> ' . $link['title'];
 
   $output = '<li>';
   if (isset($link['href'])) {
