@@ -767,6 +767,159 @@ function minima_menu_local_action($variables) {
   return $output;
 }
 
+/**
+ * Override of theme_pager().
+ */
+function minima_pager($variables) {
+  global $pager_total;
+
+  $element = $variables['element'];
+  $pager_max = $pager_total[$element];
+
+  if ($pager_max <= 1) {
+    return '';
+  }
+
+  global $pager_page_array;
+
+  $output = '';
+  $tags = $variables['tags'];
+  $parameters = $variables['parameters'];
+  $quantity = $variables['quantity'];
+
+  // Determine which pages we're running to/from.
+  $pager_middle = ceil($quantity / 2);
+  $pager_current = $pager_page_array[$element] + 1;
+  $pager_first = $pager_current - $pager_middle + 1;
+  $pager_last = $pager_current + $quantity - $pager_middle;
+
+  $i = $pager_first;
+  if ($pager_last > $pager_max) {
+    // Don't go past the last page.
+    $i += $pager_max - $pager_last;
+    $pager_last = $pager_max;
+  }
+  if ($i <= 0) {
+    // Similarly, don't output pages before the first.
+    $i = 1;
+    $pager_last = $pager_last + (1 - $i);
+  }
+
+  // Only generate the pager items if there is more than one page.
+  if ($i != $pager_max) {
+    $links['pager-first'] = theme('pager_first', array(
+      'text' => (isset($tags[0]) ? $tags[0] : t('First')),
+      'element' => $element,
+      'parameters' => $parameters,
+    ));
+
+    $links['pager-previous'] = theme('pager_previous', array(
+      'text' => (isset($tags[1]) ? $tags[1] : t('Prev')),
+      'element' => $element,
+      'interval' => 1,
+      'parameters' => $parameters,
+    ));
+
+    for ($i; $i <= $pager_last && $i <= $pager_max; $i++) {
+      if ($i < $pager_current) {
+        $links["$i pager-item"] = theme('pager_previous', array(
+          'text' => $i,
+          'element' => $element,
+          'interval' => ($pager_current - $i),
+          'parameters' => $parameters,
+        ));
+      }
+
+      if ($i == $pager_current) {
+        $links["$i pager-current"] = array('title' => $i);
+      }
+
+      if ($i > $pager_current) {
+        $links["$i pager-item"] = theme('pager_next', array(
+          'text' => $i,
+          'element' => $element,
+          'interval' => ($i - $pager_current),
+          'parameters' => $parameters,
+        ));
+      }
+    }
+
+    $links['pager-next'] = theme('pager_next', array(
+      'text' => (isset($tags[3]) ? $tags[3] : t('Next')),
+      'element' => $element,
+      'interval' => 1,
+      'parameters' => $parameters,
+    ));
+
+    $links['pager-last'] = theme('pager_last', array(
+      'text' => (isset($tags[4]) ? $tags[4] : t('Last')),
+      'element' => $element,
+      'parameters' => $parameters,
+    ));
+
+    $output = theme('links', array(
+      'links' => array_filter($links),
+      'attributes' => array(
+        'class' => 'pager list--inline',
+      ),
+    ));
+  }
+
+  return $output;
+}
+
+/**
+ * Override of theme_pager_link().
+ *
+ * Unforunately theme_pager_link() doesn't use l() to generate markup. Return an
+ * array suitable for theme_links() rather than marked up HTML.
+ */
+function minima_pager_link($variables) {
+  $text = $variables['text'];
+  $page_new = $variables['page_new'];
+  $element = $variables['element'];
+  $parameters = $variables['parameters'];
+  $attributes = $variables['attributes'];
+
+  $page = isset($_GET['page']) ? $_GET['page'] : '';
+  if ($new_page = implode(',', pager_load_array($page_new[$element], $element, explode(',', $page)))) {
+    $parameters['page'] = $new_page;
+  }
+
+  $query = array();
+  if (count($parameters)) {
+    $query = drupal_get_query_parameters($parameters, array());
+  }
+  if ($query_pager = pager_get_query_parameters()) {
+    $query = array_merge($query, $query_pager);
+  }
+
+  // Set each pager link title
+  if (!isset($attributes['title'])) {
+    static $titles = NULL;
+    if (!isset($titles)) {
+      $titles = array(
+        t('« first') => t('Go to first page'),
+        t('‹ previous') => t('Go to previous page'),
+        t('next ›') => t('Go to next page'),
+        t('last »') => t('Go to last page'),
+      );
+    }
+    if (isset($titles[$text])) {
+      $attributes['title'] = $titles[$text];
+    }
+    elseif (is_numeric($text)) {
+      $attributes['title'] = t('Go to page @number', array('@number' => $text));
+    }
+  }
+
+  return array(
+    'title' => $text,
+    'href' => $_GET['q'],
+    'attributes' => $attributes,
+    'query' => count($query) ? $query : NULL,
+  );
+}
 
 /**
  * Alter hooks =================================================================
@@ -828,20 +981,4 @@ function minima_entity_view_alter(&$build) {
     // Remove core drupal classes.
     $classes = array_diff($classes, array('links', 'inline'));
   }
-}
-
-/**
- * Implements hook_page_alter().
- */
-function minima_page_alter(&$page) {
-  /*drupal_set_message('Notice message', 'status');
-
-  drupal_set_message(t('Notice message with a !link inside', array(
-    '!link' => l(
-      'link', ''
-    ),
-  )), 'status');
-
-  drupal_set_message('Warning message', 'warning');
-  drupal_set_message('Error message', 'error');*/
 }
