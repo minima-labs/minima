@@ -730,6 +730,43 @@ function minima_fieldset($variables) {
   return $output;
 }
 
+/**
+ * Returns HTML for a single local action link.
+ *
+ * @param $variables
+ *   An associative array containing:
+ *   - element: A render element containing:
+ *     - #link: A menu link array with 'title', 'href', and 'localized_options'
+ *       keys.
+ *
+ * @ingroup themeable
+ */
+function minima_menu_local_action($variables) {
+  $link = $variables['element']['#link'];
+
+  // Add button classes.
+  $options = isset($link['localized_options']) ? $link['localized_options'] : array();
+  $options['attributes']['class'][] = 'button button--small';
+
+  // Add plus icon.
+  $options['html'] = TRUE;
+  $link['title'] = '<span class="icon--plus' . $icon .'"></span> ' . $link['title'];
+
+  $output = '<li>';
+  if (isset($link['href'])) {
+    $output .= l($link['title'], $link['href'], $options);
+  }
+  elseif (!empty($link['localized_options']['html'])) {
+    $output .= $link['title'];
+  }
+  else {
+    $output .= check_plain($link['title']);
+  }
+  $output .= "</li>\n";
+
+  return $output;
+}
+
 
 /**
  * Alter hooks =================================================================

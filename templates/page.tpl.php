@@ -67,7 +67,7 @@
             <?php endif; ?>
 
             <?php if ($action_links): ?>
-              <ul class="action-links">
+              <ul class="action-links list--inline">
                 <?php print render($action_links); ?>
               </ul>
             <?php endif; ?>
