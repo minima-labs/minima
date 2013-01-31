@@ -107,7 +107,13 @@ function minima_process_html_tag(&$variables) {
 function minima_preprocess_link(&$variables) {
   if (!empty($variables['options']['attributes']['class'])) {
     $class = &$variables['options']['attributes']['class'];
-    $class = array_diff($class, array('active'));
+
+    if (is_array($class)) {
+      $class = array_diff($class, array('active'));
+    }
+    elseif (strstr($class, 'active')) {
+      $class = str_replace('active', '', $class);
+    }
   }
 }
 
