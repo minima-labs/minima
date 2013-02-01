@@ -100,6 +100,24 @@ function minima_process_html_tag(&$variables) {
 }
 
 /**
+ * Preprocess function for theme('link').
+ *
+ * Remove the 'active' class from anchor tags since they are not required.
+ */
+function minima_preprocess_link(&$variables) {
+  if (!empty($variables['options']['attributes']['class'])) {
+    $class = &$variables['options']['attributes']['class'];
+
+    if (is_array($class)) {
+      $class = array_diff($class, array('active'));
+    }
+    elseif (strstr($class, 'active')) {
+      $class = str_replace('active', '', $class);
+    }
+  }
+}
+
+/**
  * Implement hook_html_head_alter().
  */
 function minima_html_head_alter(&$head) {
@@ -807,52 +825,54 @@ function minima_pager($variables) {
 
   // Only generate the pager items if there is more than one page.
   if ($i != $pager_max) {
-    $links['pager-first'] = theme('pager_first', array(
-      'text' => (isset($tags[0]) ? $tags[0] : t('First')),
+    $links['first'] = theme('pager_first', array(
+      'text' => isset($tags[0]) ? $tags[0] : t('First'),
       'element' => $element,
       'parameters' => $parameters,
     ));
 
-    $links['pager-previous'] = theme('pager_previous', array(
-      'text' => (isset($tags[1]) ? $tags[1] : t('Prev')),
+    $links['previous'] = theme('pager_previous', array(
+      'text' => isset($tags[1]) ? $tags[1] : t('Prev'),
       'element' => $element,
       'interval' => 1,
       'parameters' => $parameters,
     ));
 
-    for ($i; $i <= $pager_last && $i <= $pager_max; $i++) {
+    for (; $i <= $pager_last && $i <= $pager_max; $i++) {
+      $link = NULL;
+
       if ($i < $pager_current) {
-        $links["$i pager-item"] = theme('pager_previous', array(
+        $link = theme('pager_previous', array(
           'text' => $i,
           'element' => $element,
-          'interval' => ($pager_current - $i),
+          'interval' => $pager_current - $i,
+          'parameters' => $parameters,
+        ));
+      }
+      elseif ($i == $pager_current) {
+        $link = array('title' => $i);
+      }
+      elseif ($i > $pager_current) {
+        $link = theme('pager_next', array(
+          'text' => $i,
+          'element' => $element,
+          'interval' => $i - $pager_current,
           'parameters' => $parameters,
         ));
       }
 
-      if ($i == $pager_current) {
-        $links["$i pager-current"] = array('title' => $i);
-      }
-
-      if ($i > $pager_current) {
-        $links["$i pager-item"] = theme('pager_next', array(
-          'text' => $i,
-          'element' => $element,
-          'interval' => ($i - $pager_current),
-          'parameters' => $parameters,
-        ));
-      }
+      $links[$i] = $link;
     }
 
-    $links['pager-next'] = theme('pager_next', array(
-      'text' => (isset($tags[3]) ? $tags[3] : t('Next')),
+    $links['next'] = theme('pager_next', array(
+      'text' => isset($tags[3]) ? $tags[3] : t('Next'),
       'element' => $element,
       'interval' => 1,
       'parameters' => $parameters,
     ));
 
-    $links['pager-last'] = theme('pager_last', array(
-      'text' => (isset($tags[4]) ? $tags[4] : t('Last')),
+    $links['last'] = theme('pager_last', array(
+      'text' => isset($tags[4]) ? $tags[4] : t('Last'),
       'element' => $element,
       'parameters' => $parameters,
     ));
@@ -899,10 +919,10 @@ function minima_pager_link($variables) {
     static $titles = NULL;
     if (!isset($titles)) {
       $titles = array(
-        t('« first') => t('Go to first page'),
-        t('‹ previous') => t('Go to previous page'),
-        t('next ›') => t('Go to next page'),
-        t('last »') => t('Go to last page'),
+        t('First') => t('Go to the first page'),
+        t('Prev') => t('Go to the previous page'),
+        t('Next') =>  t('Go to the next page'),
+        t('Last') => t('Go to the last page'),
       );
     }
     if (isset($titles[$text])) {
