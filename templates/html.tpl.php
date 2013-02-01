@@ -48,6 +48,7 @@
 <head profile="<?php print $grddl_profile; ?>">
   <?php print $head; ?>
   <title><?php print $head_title; ?></title>
+  <meta name="viewport" content="width=device-width">
   <?php print $styles; ?>
   <?php print $scripts; ?>
 </head>
@@ -60,3 +61,4 @@
   <?php print $page_bottom; ?>
 </body>
 </html>
+
