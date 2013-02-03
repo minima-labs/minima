@@ -1004,3 +1004,22 @@ function minima_entity_view_alter(&$build) {
     $classes = array_diff($classes, array('links', 'inline'));
   }
 }
+
+/**
+ * Implements hook_element_info_alter().
+ */
+function minima_element_info_alter(&$type) {
+  if (isset($type['text_format'])) {
+    $type['text_format']['#process'][] = 'minima_process_format';
+  }
+}
+
+/**
+ * Process callback for the 'text_format' form element. Simplifies the output.
+ */
+function minima_process_format($element) {
+  $element['format']['format']['#title'] = t('Format');
+  $element['format']['guidelines']['#access'] = FALSE;
+
+  return $element;
+}
