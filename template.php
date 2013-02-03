@@ -825,13 +825,13 @@ function minima_pager($variables) {
 
   // Only generate the pager items if there is more than one page.
   if ($i != $pager_max) {
-    $links['first'] = theme('pager_first', array(
+    $links['pager__item pager__item--first'] = theme('pager_first', array(
       'text' => isset($tags[0]) ? $tags[0] : t('First'),
       'element' => $element,
       'parameters' => $parameters,
     ));
 
-    $links['previous'] = theme('pager_previous', array(
+    $links['pager__item pager__item--previous'] = theme('pager_previous', array(
       'text' => isset($tags[1]) ? $tags[1] : t('Prev'),
       'element' => $element,
       'interval' => 1,
@@ -839,7 +839,8 @@ function minima_pager($variables) {
     ));
 
     for (; $i <= $pager_last && $i <= $pager_max; $i++) {
-      $link = NULL;
+      $link = '';
+      $class = 'pager__item';
 
       if ($i < $pager_current) {
         $link = theme('pager_previous', array(
@@ -851,6 +852,7 @@ function minima_pager($variables) {
       }
       elseif ($i == $pager_current) {
         $link = array('title' => $i);
+        $class .= ' pager__item--active';
       }
       elseif ($i > $pager_current) {
         $link = theme('pager_next', array(
@@ -861,17 +863,17 @@ function minima_pager($variables) {
         ));
       }
 
-      $links[$i] = $link;
+      $links["$class $i"] = $link;
     }
 
-    $links['next'] = theme('pager_next', array(
+    $links['pager__item pager__item--next'] = theme('pager_next', array(
       'text' => isset($tags[3]) ? $tags[3] : t('Next'),
       'element' => $element,
       'interval' => 1,
       'parameters' => $parameters,
     ));
 
-    $links['last'] = theme('pager_last', array(
+    $links['pager__item pager__item--last'] = theme('pager_last', array(
       'text' => isset($tags[4]) ? $tags[4] : t('Last'),
       'element' => $element,
       'parameters' => $parameters,
