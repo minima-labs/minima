@@ -1,1 +1,9 @@
 .pager {}
+
+.pager__item {}
+
+.pager__item--active {}
+.pager__item--first {}
+.pager__item--previous {}
+.pager__item--next {}
+.pager__item--last {}
